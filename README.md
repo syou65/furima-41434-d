@@ -12,6 +12,9 @@
 | katakana_name      | string | null: false |
 | birth_date         | date   | null: false |
 
+### Association
+- has_many :items_users
+- has_many :orders_users
 
 
 
@@ -28,9 +31,14 @@
 | shipping_day_id       | integer   | null: false |
 | price                 | integer   | null: false |
 
+### Association
+- belongs_to :items_users
+
 # orders テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
+| user               | references  | null: false, foreign_key: true |
+| item               | references  | null: false, foreign_key: true |
 | postal_code        | string| null: false  |
 | prefecture_id      | integer| null: false |
 | city               | string | null: false |
@@ -38,9 +46,17 @@
 | building_name      | string |
 | telephone_number   | string | null: false |
 
-# purchase record テーブル
+### Association
+- belongs_to :orders_users
+
+
+# purchase records テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | user               | references  | null: false, foreign_key: true |
 | item               | references  | null: false, foreign_key: true |
+
+### Association
+has_one :purchase records_users
+has_one :purchase records_items
 
