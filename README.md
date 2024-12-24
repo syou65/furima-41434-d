@@ -6,8 +6,8 @@
 | nickname           | string | null: false |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
-| full_name          | string | null: false |
-| name               | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
 | katakana_full_name | string | null: false |
 | katakana_name      | string | null: false |
 | birth_date         | date   | null: false |
@@ -15,7 +15,7 @@
 ### Association
 - has_many :items
 - has_many :orders
-- belongs_to :purchase record
+- belongs_to :purchase 
 
 
 
@@ -35,7 +35,7 @@
 ### Association
 - belongs_to :user
 - has_one    :order
-- has_one    :purchase record
+- has_one    :purchase 
 
 # orders テーブル
 | Column             | Type   | Options     |
@@ -52,10 +52,10 @@
 ### Association
 - belongs_to :user
 - has_one    :item
-- has_one    :purchase record
+- has_one    :purchase 
 
 
-# purchase records テーブル
+# purchase テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | user               | references  | null: false, foreign_key: true |
