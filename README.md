@@ -13,8 +13,9 @@
 | birth_date         | date   | null: false |
 
 ### Association
-- has_many :items_users
-- has_many :orders_users
+- has_many :items
+- has_many :orders
+- belongs_to :purchase record
 
 
 
@@ -32,7 +33,9 @@
 | price                 | integer   | null: false |
 
 ### Association
-- belongs_to :items_users
+- belongs_to :user
+- has_one    :order
+- has_one    :purchase record
 
 # orders テーブル
 | Column             | Type   | Options     |
@@ -47,7 +50,9 @@
 | telephone_number   | string | null: false |
 
 ### Association
-- belongs_to :orders_users
+- belongs_to :user
+- has_one    :item
+- has_one    :purchase record
 
 
 # purchase records テーブル
@@ -57,6 +62,7 @@
 | item               | references  | null: false, foreign_key: true |
 
 ### Association
-has_one :purchase records_users
-has_one :purchase records_items
+- belongs_to :user
+- has_one    :item
+- has_one    :order
 
