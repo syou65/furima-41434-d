@@ -15,7 +15,6 @@
 ### Association
 - has_many :items
 - has_many :orders
-- belongs_to :purchase 
 
 
 
@@ -34,14 +33,12 @@
 
 ### Association
 - belongs_to :user
-- has_one    :order
 - has_one    :purchase 
 
 # orders テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| user               | references  | null: false, foreign_key: true |
-| item               | references  | null: false, foreign_key: true |
+| purchase           | references  | null: false, foreign_key: true |
 | postal_code        | string| null: false  |
 | prefecture_id      | integer| null: false |
 | city               | string | null: false |
@@ -50,12 +47,12 @@
 | telephone_number   | string | null: false |
 
 ### Association
-- belongs_to :user
+- belongs_to :purchase
 - has_one    :item
 - has_one    :purchase 
 
 
-# purchase テーブル
+# purchases テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | user               | references  | null: false, foreign_key: true |
@@ -63,6 +60,5 @@
 
 ### Association
 - belongs_to :user
-- has_one    :item
-- has_one    :order
+- belongs_to :item
 
