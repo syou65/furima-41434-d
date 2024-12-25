@@ -48,7 +48,6 @@
 
 ### Association
 - belongs_to :purchase
-- has_one    :item
 
 
 # purchases テーブル
