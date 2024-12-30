@@ -5,6 +5,12 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
   describe 'ユーザー新規登録' do
+    context '新規登録できる場合' do
+      it "全てのデータが存在すれば登録できる" do
+        expect(@user).to be_valid
+      end
+    end
+    context '新規登録できない場合' do
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -45,14 +51,20 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
     end
     it 'passwordが半角では登録できない'do
-      @user.password = '9090'
-      @user.password_confirmation = '9090'
+      @user.password = '90909570'
+      @user.password_confirmation = '90909570'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
     end
     it 'passwordが数字では登録できない'do
       @user.password = 9090
       @user.password_confirmation = 9090
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+    end
+    it 'passwordが英字だけでは登録できない'do
+      @user.password = 'yamazaki'
+      @user.password_confirmation = 'yamazaki'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
     end
@@ -87,10 +99,30 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Katakana full name 全角カタカナを使用してください")
     end
+    it 'katakana_full_nameがひらがなでは登録できない'do
+      @user.katakana_full_name = 'やまだ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Katakana full name 全角カタカナを使用してください")
+    end
+    it 'katakana_full_nameが漢字では登録できない'do
+      @user.katakana_full_name = '山田'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Katakana full name 全角カタカナを使用してください")
+    end
     it 'katakana_nameが空では登録できない'do
       @user.katakana_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Katakana name 全角カタカナを使用してください")
+    end
+    it 'katakana_nameがひらがなでは登録できない'
+    @user.katakana_name = 'たろう'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Katakana name 全角カタカナを使用してください")
+    end
+    it 'katakana_nameが漢字では登録できない'
+    @user.katakana_name = '太郎'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Katakana name 全角カタカナを使用してください")
     end
     it 'birth_dateが空では登録できない'do
        @user.birth_date = ''
@@ -98,5 +130,6 @@ RSpec.describe User, type: :model do
        expect(@user.errors.full_messages).to include("Birth date can't be blank")
     end
   end
+ end
 end
 
