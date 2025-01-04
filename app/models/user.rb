@@ -12,7 +12,8 @@ class User < ApplicationRecord
   with_options presence: true, format: { with: /\A[ァ-ヴー]+\z/u, message: '全角カタカナを使用してください' } do
    validates :katakana_full_name, presence: true  
    validates :katakana_name, presence: true  
- end
+  end
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
    validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
+ has_many :items
 end
