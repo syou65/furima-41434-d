@@ -21,6 +21,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
+      it 'titleが空では登録できない' do
+        @item.title = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Title can't be blank")
+      end
+      it 'detailが空では登録できない' do
+        @item.detail = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Detail can't be blank")
+      end
       it 'categoryが空では登録できない' do
         @item.category_id = 1
         @item.valid?
