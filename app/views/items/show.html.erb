@@ -4,36 +4,35 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= "商品名" %>
+      <%= (@item.title) %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag "item-sample.png" ,class:"item-box-img" %>
+      <%= image_tag (@item.image) ,class:"item-box-img" %>
       
-      <div class="sold-out">
+      <%# <div class="sold-out">
         <span>Sold Out!!</span>
-      </div>
+      </div> %>
       
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
+       <%= number_to_currency(@item.price, unit: "¥", precision: 0) %>円
       </span>
       <span class="item-postage">
-        <%= "配送料負担" %>
+        <%= (@item.shipping_charge.name) %>
       </span>
     </div>
 
    
-
+    <% if user_signed_in?  %>
+    <% if  current_user.id == @item.user_id %>
     <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", "#", data: {turbo_method: :delete}, class:"item-destroy" %>
-
-
-    
+    <% else %>
     <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-    
-
+    <% end %>   
+    <% end %>
     <div class="item-explain-box">
       <span><%= "商品説明" %></span>
     </div>
