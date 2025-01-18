@@ -8,15 +8,20 @@ RSpec.describe PurchaseForm, type: :model do
   end
   describe '商品購入機能' do
     context '購入できる場合' do
-      it '全てのデータが存在すれば登録できる' do
+      it '全てのデータが存在すれば保存できる' do
         expect(@purchase_form).to be_valid
       end
-      it ' building_nameは空でも登録できる' do
+      it ' building_nameは空でも保存できる' do
         @purchase_form.building_name = ''
         expect(@purchase_form).to be_valid
       end
     end
     context '購入できない場合' do
+      it 'tokenが空では保存できないこと' do
+        @purchase_form.token = nil
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include("Token can't be blank")
+      end
       it 'postal_codeが空では保存できない' do
         @purchase_form.postal_code = nil
         @purchase_form.valid?
