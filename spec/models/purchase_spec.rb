@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PurchaseForm, type: :model do
   before do
     @user = FactoryBot.create(:user)
-    @item = FactoryBot.create(:item, user: @user)
+    @item = FactoryBot.create(:item)
     @purchase_form = FactoryBot.build(:purchase_form, user_id: @user.id, item_id: @item.id)
   end
   describe '商品購入機能' do
@@ -66,6 +66,16 @@ RSpec.describe PurchaseForm, type: :model do
         @purchase_form.telephone_number = '０９０１２３４５６７８９'
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include ("Telephone number is invalid. Enter 10 or 11 digits without hyphens")
+      end
+      it 'user_idが空では保存できない' do
+        @purchase_form.user_id = nil
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include ("User can't be blank")
+      end
+      it 'item_idが空では保存できない' do
+        @purchase_form.item_id = nil
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include ("Item can't be blank")
       end
     end
   end
