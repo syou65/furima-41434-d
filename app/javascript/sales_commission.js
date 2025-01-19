@@ -1,6 +1,6 @@
 const price = () => {
-
-  const priceInput = document.getElementById('price');
+  
+  const priceInput = document.getElementById('item-price');
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
 
