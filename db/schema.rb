@@ -55,12 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_13_143025) do
   end
 
   create_table "orders", charset: "utf8", force: :cascade do |t|
-    t.string "postal_code"
-    t.integer "prefecture_id"
-    t.string "city"
-    t.string "house_number"
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "house_number", null: false
     t.string "building_name"
-    t.string "telephone_number"
+    t.string "telephone_number", null: false
     t.bigint "purchase_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
