@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
   def check_owner
-    unless @item.user == current_user
+    if @item.user == current_user || @item.purchase.present?
       redirect_to root_path, alert: 
     end
   end
